@@ -70,7 +70,7 @@ subject to path_exists{(i,j) in PATH, m in CABLE_TYPE}:
 	cables[i,j,m] <= is_cable_used[i,j]*sum_d;
 
 subject to cabinet_needed{n in TRANSPORT_NODE}:
-		sum{(i,j) in PATH, m in CABLE_TYPE} (ape[n,i,j]+bpe[n,i,j])*cables[i,j,m] <= path_counter*is_cabinet[n];
+		sum{(i,j) in PATH, m in CABLE_TYPE} (ape[n,i,j]-bpe[n,i,j])*cables[i,j,m] <= path_counter*is_cabinet[n];
 #        sum{(i,j) in PATH, m in CABLE_TYPE} (ape[n,i,j]+bpe[n,i,j])*cables[i,j,m]*m <= path_counter*is_cabinet[n]; TAK_BYLO
 		
 subject to Kirchhoff{n in NODES, k in CENTRAL, l in DEMAND}:

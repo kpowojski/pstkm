@@ -1,0 +1,10 @@
+reset;
+model 'D:\Projekty 16Z\PSTKM\Projekt\pstkm\Siec.mod';
+data 'D:\Projekty 16Z\PSTKM\Projekt\pstkm\prosta_siec_3_wezly.dat';
+option solver './cplex';
+solve;
+display d_served;
+display is_cabinet;
+display is_cable_used;
+display cables;
+display Profit;
