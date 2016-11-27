@@ -1,8 +1,9 @@
 reset;
-model Siec.mod;
-data dw.dat;
+model 'D:\Projekty 16Z\PSTKM\Projekt\pstkm\Siec.mod';
+data 'D:\Projekty 16Z\PSTKM\Projekt\pstkm\dw_jeden_wezel.dat';
 option solver './cplex';
 solve;
-display cables, C;
-display XXed, d_served, Profit;
-display is_cabinet, is_cable_used;
+display d_served;
+display is_cabinet;
+display is_cable_used;
+display Profit;
