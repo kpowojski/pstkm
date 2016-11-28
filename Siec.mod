@@ -54,16 +54,18 @@ maximize Profit:       	  							#f. celu
 	-sum{(i,j) in PATH}is_cable_used[i,j]*TRENCHING_COST[i,j]
 ;
 
+# suma zapotrzebowan na krawedzi musi byc wieksza niz suma logicznych polaczen
 subject to demand{(i,j)in L}:
-        hpd[i,j] >= sum{k in CENTRAL, l in DEMAND, m in CABLE_TYPE} Xed[i,j,k,l,m]*hd[l];
+        hpd[i,j] >= sum{k in CENTRAL, l in DEMAND, m in CABLE_TYPE} Xed[i,j,k,l,m]*hd[l]; 
 		
-		
+
+# suma zapotrzebowan na konkretnej krawedzi jest mniejsza rowna sumie wszystkich zapotrzebowan		
 subject to usage_l{(i,j) in L, m in CABLE_TYPE}:
 	(sum {k in CENTRAL,l in DEMAND} Xed[i,j,k,l,m]*m) <= sum_d;
 
-
-subject to demand_on_edge{(i,j) in PATH, m in CABLE_TYPE}:
-    (cables[i,j,m]) >= (sum{(k,l) in L}XXed[i,j,k,l,m]);
+# 
+#subject to demand_on_edge{(i,j) in PATH, m in CABLE_TYPE}:
+#    (cables[i,j,m]) >= (sum{(k,l) in L}XXed[i,j,k,l,m]);
 
 
 subject to path_exists{(i,j) in PATH, m in CABLE_TYPE}:

@@ -1,0 +1,32 @@
+set TRANSPORT_NODE := N3;
+set CENTRAL := N1;
+set DEMAND := N2 N4;
+
+set PATH := (N1, N3) (N3, N2) (N1, N2) (N3, N4);
+
+param TRENCHING_COST := 	
+			N1 N3 10
+       	 	N3 N2 10
+			N1 N2 100
+			N3 N4 10
+;
+
+
+set CABLE_TYPE :=
+	1 2 3 4 5;
+
+
+param M0 := 100;
+param CABINET_COST := 10;
+
+param hd :=
+		N2 3
+		N4 2	
+;
+
+param hc :=
+      	1 10
+		2 15
+		3 20
+		4 25
+		5 26;
