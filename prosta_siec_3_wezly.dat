@@ -12,7 +12,7 @@ param TRENCHING_COST :=
 
 
 set CABLE_TYPE :=
-	1 2 4 8 ;
+	1 2 3 4 8 ;
 
 
 param M0 := 100;
@@ -26,5 +26,6 @@ param hd :=
 param hc :=
       	1 10
 		2 15
+		3 20
 		4 25
-		8 35;
+		8 7;

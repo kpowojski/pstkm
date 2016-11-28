@@ -55,7 +55,7 @@ maximize Profit:       	  							#f. celu
 ;
 
 subject to demand{(i,j)in L}:
-        hpd[i,j] >= sum{k in CENTRAL, l in DEMAND, m in CABLE_TYPE}Xed[i,j,k,l,m]*m;
+        hpd[i,j] >= sum{k in CENTRAL, l in DEMAND, m in CABLE_TYPE} Xed[i,j,k,l,m]*hd[l];
 		
 		
 subject to usage_l{(i,j) in L, m in CABLE_TYPE}:
@@ -63,16 +63,21 @@ subject to usage_l{(i,j) in L, m in CABLE_TYPE}:
 
 
 subject to demand_on_edge{(i,j) in PATH, m in CABLE_TYPE}:
-        (cables[i,j,m]*m) >= (sum{(k,l) in L}XXed[i,j,k,l,m]*m);
+    (cables[i,j,m]) >= (sum{(k,l) in L}XXed[i,j,k,l,m]);
 
 
 subject to path_exists{(i,j) in PATH, m in CABLE_TYPE}:
-	cables[i,j,m] <= is_cable_used[i,j]*sum_d;
-
+	cables[i,j,m]*m <= is_cable_used[i,j]*sum_d;
+	
+	
 subject to cabinet_needed{n in TRANSPORT_NODE}:
 		sum{(i,j) in PATH, m in CABLE_TYPE} (ape[n,i,j]-bpe[n,i,j])*cables[i,j,m] <= path_counter*is_cabinet[n];
-#        sum{(i,j) in PATH, m in CABLE_TYPE} (ape[n,i,j]+bpe[n,i,j])*cables[i,j,m]*m <= path_counter*is_cabinet[n]; TAK_BYLO
-		
+
+
+
+subject to one_cable_on_path{(i,j) in PATH}:
+		sum{m in CABLE_TYPE} cables[i,j,m] <= 1;
+	
 subject to Kirchhoff{n in NODES, k in CENTRAL, l in DEMAND}:
 	(sum {(i, j) in L, m in CABLE_TYPE} ae[n,i,j]*Xed[i,j,k,l,m]*m)
 	- (sum {(i,j) in L, m in CABLE_TYPE} be[n,i,j]*Xed[i,j,k,l,m]*m) =
